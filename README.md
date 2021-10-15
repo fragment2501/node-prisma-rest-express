@@ -1,16 +1,10 @@
-# REST API Example
+# REST API Example (taken and hacked up from https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-express)
 
 This example shows how to implement a **REST API with TypeScript** using [Express](https://expressjs.com/) and [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client). It is based on a SQLite database, you can find the database file with some dummy data at [`./prisma/dev.db`](./prisma/dev.db).
 
 ## Getting started
 
-### 1. Download example and install dependencies
-
-Download this example:
-
-```
-curl https://codeload.github.com/prisma/prisma-examples/tar.gz/latest | tar -xz --strip=2 prisma-examples-latest/typescript/rest-express
-```
+### 1. Install dependencies
 
 Install npm dependencies:
 
@@ -18,23 +12,6 @@ Install npm dependencies:
 cd rest-express
 npm install
 ```
-
-<details><summary><strong>Alternative:</strong> Clone the entire repo</summary>
-
-Clone this repository:
-
-```
-git clone git@github.com:prisma/prisma-examples.git --depth=1
-```
-
-Install npm dependencies:
-
-```
-cd prisma-examples/typescript/rest-express
-npm install
-```
-
-</details>
 
 ### 2. Create and seed the database
 
@@ -57,7 +34,7 @@ npx prisma db seed
 npm run dev
 ```
 
-The server is now running on `http://localhost:3000`. You can now the API requests, e.g. [`http://localhost:3000/feed`](http://localhost:3000/feed).
+The server is now running on `http://localhost:3000`. You can now the API requests, e.g. [`http://localhost:3000/post`](http://localhost:3000/post).
 
 ## Using the REST API
 
@@ -66,7 +43,7 @@ You can access the REST API of the server using the following endpoints:
 ### `GET`
 
 - `/post/:id`: Fetch a single post by its `id`
-- `/feed?searchString={searchString}&take={take}&skip={skip}&orderBy={orderBy}`: Fetch all _published_ posts
+- `/post?searchString={searchString}&take={take}&skip={skip}&orderBy={orderBy}`: Fetch all _published_ posts
   - Query Parameters
     - `searchString` (optional): This filters posts by `title` or `content`
     - `take` (optional): This specifies how many objects should be returned in the list
@@ -81,7 +58,7 @@ You can access the REST API of the server using the following endpoints:
     - `title: String` (required): The title of the post
     - `content: String` (optional): The content of the post
     - `authorEmail: String` (required): The email of the user that creates the post
-- `/signup`: Create a new user
+- `/user/signup`: Create a new user
   - Body:
     - `email: String` (required): The email address of the user
     - `name: String` (optional): The name of the user
@@ -89,7 +66,7 @@ You can access the REST API of the server using the following endpoints:
 
 ### `PUT`
 
-- `/publish/:id`: Toggle the publish value of a post by its `id`
+- `/post/publish/:id`: Toggle the publish value of a post by its `id`
 - `/post/:id/views`: Increases the `viewCount` of a `Post` by one `id`
 
 ### `DELETE`
